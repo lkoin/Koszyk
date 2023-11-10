@@ -63,9 +63,9 @@ public class Koszyk {
 
                 if (TN.equalsIgnoreCase("T")) {
                     System.out.println("Dodano do koszyka: " + product.getTitle() + " w ilości " + ilosc);
-
+                    int usuwanie = 0;
+                    ilosc = usuwanie;
                     koszyk.add(product);
-                    products.remove(product);
                     System.out.println("Zawartość koszyka:");
                     for (Product Koszyk : koszyk) {
                         System.out.println(Koszyk.displayProduct());
@@ -76,7 +76,7 @@ public class Koszyk {
 
             }
         }
-
+        products.remove(choosed);
 
     }
 
