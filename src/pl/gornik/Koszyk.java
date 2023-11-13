@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class Koszyk {
     public static void main(String[] args) {
+//zamienic new book na new product 
         Scanner scanner = new Scanner(System.in);
         Book crimeNovel = new Book("Złodziejka cienia", 50, 29.99, "Anna Kowalska");
         Book adventureBook = new Book("Skarb Atlantydy", 30, 39.99, "Jan Nowak");
