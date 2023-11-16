@@ -110,10 +110,10 @@ public class Koszyk {
                                 System.out.println("Powrót do menu");
                             }
 
-                            // Usuń z listy ogólnej tylko jeśli dodano do koszyka
+
                             products.remove(product);
                             produktZnaleziony = true;
-                            break;  // Zakończ pętlę po znalezieniu produktu
+                            break;
                         }
                     }
 
