@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Koszyk {
     public static void main(String[] args) {
-//zamienic new book na new product 
+//zamienic new book na new product
         Scanner scanner = new Scanner(System.in);
         Book crimeNovel = new Book("Złodziejka cienia", 50, 29.99, "Anna Kowalska");
         Book adventureBook = new Book("Skarb Atlantydy", 30, 39.99, "Jan Nowak");
@@ -38,48 +38,100 @@ public class Koszyk {
         products.add(educationalToy);
         products.add(remoteControlCar);
         products.add(doll);
+        products.add(rockCD);
+        products.add(concertDVD);
+        products.add(movieBluRay);
+        products.add(jazzVinyl);
         List<Product> koszyk = new ArrayList<>();
 
 
-        System.out.println("---------------------------------------------------");
-        System.out.println("Wybierz produkty, które chcesz zakupić, wpisując nazwę");
-        System.out.println("---------------------------------------------------");
-        for (Product product : products) {
-            System.out.println(product.displayProduct());
-        }
-        System.out.println("---------------------------------------------------");
-        System.out.println("Podaj nazwę produktu, który chcesz zakupić");
-        System.out.println("---------------------------------------------------");
+        boolean zakoncz = false;
 
-        String choosed = scanner.nextLine();
+        while (!zakoncz) {
+            System.out.println("---------------------------------------------------");
+            System.out.println("Wybierz opcję:");
+            System.out.println("1. Dodaj produkt do koszyka");
+            System.out.println("0. Zakończ zakupy");
+            System.out.println("---------------------------------------------------");
 
+            String opcja = scanner.nextLine();
 
-        for (Product product : products) {
-            if (choosed.equals(product.getTitle())) {
-                System.out.println("Podaj ilość: ");
-                int ilosc = scanner.nextInt();
-                scanner.nextLine();
-                System.out.println("Czy dodać do koszyka? T/N");
-                String TN = scanner.nextLine();
+            switch (opcja) {
+                case "1":
+                    System.out.println("---------------------------------------------------");
+                    System.out.println("Wybierz produkty, które chcesz zakupić, wpisując nazwę");
+                    System.out.println("lub wpisz 'koniec' aby zakończyć zakupy");
+                    System.out.println("---------------------------------------------------");
 
-                if (TN.equalsIgnoreCase("T")) {
-                    System.out.println("Dodano do koszyka: " + product.getTitle() + " w ilości " + ilosc);
-                    int usuwanie = 0;
-                    ilosc = usuwanie;
-                    koszyk.add(product);
-                    System.out.println("Zawartość koszyka:");
-                    for (Product Koszyk : koszyk) {
-                        System.out.println(Koszyk.displayProduct());
+                    for (Product product : products) {
+                        System.out.println(product.displayProduct());
                     }
-                } else {
-                    System.out.println("Powrót do menu");
-                }
 
+                    System.out.println("---------------------------------------------------");
+                    System.out.println("Podaj nazwę produktu, który chcesz zakupić");
+                    System.out.println("---------------------------------------------------");
+
+                    String choosed = scanner.nextLine();
+
+                    if (choosed.equalsIgnoreCase("koniec")) {
+                        System.out.println("Zakupiono produkty:");
+                        for (Product koszykProduct : koszyk) {
+                            System.out.println(koszykProduct.displayProduct());
+                        }
+                        System.out.println("Dziękujemy za zakupy!");
+                        zakoncz = true;
+                        break;
+                    }
+
+                    boolean produktZnaleziony = false;
+
+                    for (Product product : products) {
+                        if (choosed.equals(product.getTitle())) {
+                            System.out.println("Podaj ilość: ");
+                            int ilosc = scanner.nextInt();
+                            scanner.nextLine();
+
+                            System.out.println("Czy dodać do koszyka? T/N");
+                            String TN = scanner.nextLine();
+
+                            if (TN.equalsIgnoreCase("T")) {
+                                System.out.println("Dodano do koszyka: " + product.displayProduct() + " w ilości " + ilosc);
+
+                                // Dodaj do koszyka odpowiednią ilość
+                                for (int i = 0; i < ilosc; i++) {
+                                    koszyk.add(product);
+                                }
+
+                                System.out.println("Zawartość koszyka:");
+                                for (Product koszykProduct : koszyk) {
+                                    System.out.println(koszykProduct.displayProduct());
+                                }
+                            } else {
+                                System.out.println("Powrót do menu");
+                            }
+
+                            // Usuń z listy ogólnej tylko jeśli dodano do koszyka
+                            products.remove(product);
+                            produktZnaleziony = true;
+                            break;  // Zakończ pętlę po znalezieniu produktu
+                        }
+                    }
+
+                    if (!produktZnaleziony) {
+                        System.out.println("Produkt o podanej nazwie nie istnieje. Spróbuj ponownie.");
+                    }
+                    break;
+                case "0":
+                    System.out.println("Zakupiono produkty:");
+                    for (Product koszykProduct : koszyk) {
+                        System.out.println(koszykProduct.displayProduct());
+                    }
+                    System.out.println("Dziękujemy za zakupy!");
+                    zakoncz = true;
+                    break;
+                default:
+                    System.out.println("Nieprawidłowa opcja. Wybierz ponownie.");
             }
         }
-        products.remove(choosed);
-
     }
-
-
 }
