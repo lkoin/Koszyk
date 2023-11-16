@@ -100,6 +100,8 @@ public class Koszyk {
                                 // Dodaj do koszyka odpowiednią ilość
                                 for (int i = 0; i < ilosc; i++) {
                                     koszyk.add(product);
+                                    product.setNumberOfItems(product.setNumberOfItems(product.getNumberOfItems()-ilosc));
+                                   ;
                                 }
 
                                 System.out.println("Zawartość koszyka:");
