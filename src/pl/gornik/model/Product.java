@@ -23,6 +23,10 @@ public class Product {
                 ' ';
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public String getTitle() {
         return title;
     }

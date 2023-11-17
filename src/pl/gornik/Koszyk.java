@@ -13,35 +13,8 @@ public class Koszyk {
     public static void main(String[] args) {
 //zamienic new book na new product
         Scanner scanner = new Scanner(System.in);
-        Book crimeNovel = new Book("Złodziejka cienia", 50, 29.99, "Anna Kowalska");
-        Book adventureBook = new Book("Skarb Atlantydy", 30, 39.99, "Jan Nowak");
-        Book educationalBook = new Book("Matematyka dla początkujących", 20, 24.99, "Maria Wiśniewska");
-        Book fantasyBook = new Book("Smocza Opowieść", 40, 34.99, "Piotr Kowalczyk");
-
-        Toy babyToy = new Toy("Miękki pluszowy miś", 100, 19.99, 0);
-        Toy educationalToy = new Toy("Klocki logiczne", 50, 29.99, 3);
-        Toy remoteControlCar = new Toy("Zdalnie sterowany samochód", 30, 39.99, 6);
-        Toy doll = new Toy("Lalka z akcesoriami", 40, 24.99, 4);
-
-        Disc rockCD = new Disc("Greatest Hits", 20, 14.99, "Queen");
-        Disc concertDVD = new Disc("Live in Concert", 15, 29.99, "The Rolling Stones");
-        Disc movieBluRay = new Disc("Inception", 10, 19.99, "Hans Zimmer");
-        Disc jazzVinyl = new Disc("Kind of Blue", 25, 34.99, "Miles Davis");
-
-
         List<Product> products = new ArrayList<>();
-        products.add(crimeNovel);
-        products.add(adventureBook);
-        products.add(educationalBook);
-        products.add(fantasyBook);
-        products.add(babyToy);
-        products.add(educationalToy);
-        products.add(remoteControlCar);
-        products.add(doll);
-        products.add(rockCD);
-        products.add(concertDVD);
-        products.add(movieBluRay);
-        products.add(jazzVinyl);
+        initializeShop(products);
         List<Product> koszyk = new ArrayList<>();
 
 
@@ -55,7 +28,7 @@ public class Koszyk {
             System.out.println("---------------------------------------------------");
 
             String opcja = scanner.nextLine();
-
+            double price = 0;
             switch (opcja) {
                 case "1":
                     System.out.println("---------------------------------------------------");
@@ -99,8 +72,13 @@ public class Koszyk {
 
 
                                 for (int i = 0; i < ilosc; i++) {
+
                                     koszyk.add(product);
                                     product.setNumberOfItems(product.getNumberOfItems()-1);
+                                    if (product.getNumberOfItems()<0) {
+                                        products.remove(product);
+                                        price += product.getPrice();
+                                    }
                                 }
 
                                 System.out.println("Zawartość koszyka:");
@@ -111,7 +89,8 @@ public class Koszyk {
                                 System.out.println("Powrót do menu");
                             }
 
-                            if (product.getNumberOfItems()==0) products.remove(product);
+//                            if (product.getNumberOfItems()==0) products.remove(product); usuwnnie produktu gdy 0
+
                             produktZnaleziony = true;
                             break;
                         }
@@ -122,7 +101,7 @@ public class Koszyk {
                     }
                     break;
                 case "0":
-                    System.out.println("Zakupiono produkty:");
+                    System.out.println("Zakupiono produkty:" + price );
                     for (Product koszykProduct : koszyk) {
                         System.out.println(koszykProduct.displayProduct());
                     }
@@ -133,5 +112,34 @@ public class Koszyk {
                     System.out.println("Nieprawidłowa opcja. Wybierz ponownie.");
             }
         }
+    }
+    public static void initializeShop(List<Product> products) {
+        Book crimeNovel = new Book("Złodziejka cienia", 50, 29.99, "Anna Kowalska");
+        Book adventureBook = new Book("Skarb Atlantydy", 30, 39.99, "Jan Nowak");
+        Book educationalBook = new Book("Matematyka dla początkujących", 20, 24.99, "Maria Wiśniewska");
+        Book fantasyBook = new Book("Smocza Opowieść", 40, 34.99, "Piotr Kowalczyk");
+
+        Toy babyToy = new Toy("Miękki pluszowy miś", 100, 19.99, 0);
+        Toy educationalToy = new Toy("Klocki logiczne", 50, 29.99, 3);
+        Toy remoteControlCar = new Toy("Zdalnie sterowany samochód", 30, 39.99, 6);
+        Toy doll = new Toy("Lalka z akcesoriami", 40, 24.99, 4);
+
+        Disc rockCD = new Disc("Greatest Hits", 20, 14.99, "Queen");
+        Disc concertDVD = new Disc("Live in Concert", 15, 29.99, "The Rolling Stones");
+        Disc movieBluRay = new Disc("Inception", 10, 19.99, "Hans Zimmer");
+        Disc jazzVinyl = new Disc("Kind of Blue", 25, 34.99, "Miles Davis");
+
+        products.add(crimeNovel);
+        products.add(adventureBook);
+        products.add(educationalBook);
+        products.add(fantasyBook);
+        products.add(babyToy);
+        products.add(educationalToy);
+        products.add(remoteControlCar);
+        products.add(doll);
+        products.add(rockCD);
+        products.add(concertDVD);
+        products.add(movieBluRay);
+        products.add(jazzVinyl);
     }
 }

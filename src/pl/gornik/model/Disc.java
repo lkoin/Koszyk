@@ -11,7 +11,7 @@ public class Disc extends Product{
 
     @Override
     public String displayProduct() {
-        return super.displayProduct();
+        return super.displayProduct()+"Performer: "+performer;
     }
 
     @Override

@@ -11,7 +11,8 @@ public class Book extends Product{
 
     @Override
     public String displayProduct() {
-        return super.displayProduct();
+        return super.displayProduct()+"author:"+ author;
+
     }
 
     @Override
