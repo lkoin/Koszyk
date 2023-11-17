@@ -97,11 +97,10 @@ public class Koszyk {
                             if (TN.equalsIgnoreCase("T")) {
                                 System.out.println("Dodano do koszyka: " + product.displayProduct() + " w ilości " + ilosc);
 
-                                // Dodaj do koszyka odpowiednią ilość
+
                                 for (int i = 0; i < ilosc; i++) {
                                     koszyk.add(product);
-                                    product.setNumberOfItems(product.setNumberOfItems(product.getNumberOfItems()-ilosc));
-                                   ;
+                                    product.setNumberOfItems(product.getNumberOfItems()-1);
                                 }
 
                                 System.out.println("Zawartość koszyka:");
@@ -112,8 +111,7 @@ public class Koszyk {
                                 System.out.println("Powrót do menu");
                             }
 
-
-                            products.remove(product);
+                            if (product.getNumberOfItems()==0) products.remove(product);
                             produktZnaleziony = true;
                             break;
                         }
